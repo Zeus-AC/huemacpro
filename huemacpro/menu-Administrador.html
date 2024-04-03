@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Huemac</title>
+    <link rel="stylesheet" href="styles/estilos.css">
+    <link rel="stylesheet" href="styles/stylesmenu.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<section class="fondo">
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <a href="administrar-empleados.html">
+                    <i class="fa-solid fa-pen-to-square"></i> Administrar empleados
+                </a>
+
+                <a href="historial.html">
+                    <i class="fa-solid fa-folder"></i> Historial de ventas
+                </a>
+                <a href="#">
+                    <i class="fa-regular fa-clipboard"></i> Reportes
+                </a>
+
+                <a href="login.html" id="logout-link">
+                    <i class="fa-regular fa-circle-xmark"></i> Cerrar sesión
+                </a>
+            </nav>
+            <label for="btn-menu">✖️</label>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+        
+            <div class="btn-menu">
+                <label for="btn-menu">☰</label>
+            </div>
+            <div class="logo">
+                <h1>Menú</h1>
+            </div>
+            <nav class="menu">
+                <img src="img/logo.png" alt="Mi Imagen" class="mi-imagen">
+            </nav>
+        </div>
+    </header>
+    <footer class="user-role" id="user-role">
+    
+       
+    </footer>
+   
+
+    <script>
+        document.getElementById('logout-link').addEventListener('click', function() {
+            // Simula cerrar sesión eliminando el usuario del almacenamiento local
+            localStorage.removeItem('usuario');
+            
+            // Redirige a la página de inicio de sesión u otra página deseada
+            window.location.href = 'inicio de sesion.html';
+        });
+
+        // Evita que el usuario retroceda a esta página después de cerrar sesión
+        history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, window.location.href);
+        });
+        
+        document.getElementById('logout-link').addEventListener('click', function() {
+            // Realizar una solicitud AJAX para cerrar la sesión en el servidor
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Redirigir a la página de inicio de sesión o cualquier otra página
+                    window.location.href = 'login.html';
+                }
+            };
+
+            xhr.open('GET', 'cerrar-sesion.php', true);
+            xhr.send();
+        });
+         // Evita que el usuario retroceda a esta página después de cerrar sesión
+         history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, window.location.href);
+        });
+    </script>
+    <script src="footer.js"></script>
+</section>
+</body>
+</html>

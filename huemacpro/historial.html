@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Historial de ventas</title>
+    <link rel="stylesheet" type="text/css" href="styles/stylesmenu.css">
+    <link rel="stylesheet" type="text/css" href="styles/styleshistorial1.css">
+</head>
+<body>
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <a href="reporte de ventas.html">
+                    <i class="fa-solid fa-pen-to-square"></i> Registro de ventas
+                </a>
+                <a href="agregar.html">
+                    <i class="fa-regular fa-clipboard"></i> Agregar Brazaletes
+                </a>
+                <a href="reporte de ventas.html">
+                    <i class="fa-regular fa-clipboard"></i> Reportes
+                </a>
+               
+                <a href="login.html" id="logout-link">
+                    <i class="fa-regular fa-circle-xmark"></i> Cerrar sesión
+                </a>
+            </nav>
+            <label for="btn-menu">✖️</label>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+        
+            <div class="btn-menu">
+                <label for="btn-menu">☰</label>
+            </div>
+            <div class="logo">
+                <h1>Menú</h1>
+            </div>
+            <nav class="menu">
+                <img src="img/logo.png" alt="Mi Imagen" class="mi-imagen">
+            </nav>
+        </div>
+    </header>
+
+<br></br>
+    <br></br>
+    <br></br>
+    
+    
+    <!-- Contenedor para mostrar los resultados -->
+    <div id="resultados"></div>
+
+    <footer class="user-role" id="user-role"></footer>
+
+    <script src="footer.js"></script>
+
+    <!-- DHCHBHDGECVHEDGCVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV-->   
+
+    <div class="form-table">
+        <h2><i class="fas fa-clipboard"></i>Historial de ventas</h2>
+        <div class="hcontainer">
+            <table class="order-summary">
+                <tr>
+                    <th><i class="fas fa-user"></i> Nombre del Cliente:</th>
+                    <td><input type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre" required></td>
+                </tr>
+                <tr>
+                    <th><i class="fas fa-user"></i> Apellido Paterno:</th>
+                    <td><input type="text" name="apellido_pat" id="apellido_pat" placeholder="Ingresa el apellido paterno" required></td>
+                </tr>
+                <tr>
+                    <th><i class="fas fa-user"></i> Apellido Materno:</th>
+                    <td><input type="text" name="apellido_mat" id="apellido_mat" placeholder="Ingresa el apellido materno" required></td>
+                </tr>
+                <tr>
+                    <th><i class="fas fa-qrcode"></i> Código QR de la Pulsera:</th>
+                    <td><input type="text" name="codigo_qr" id="codigo_qr" placeholder="Ingresa el código QR de la pulsera" required></td>
+                </tr>
+                
+                <tr class="ocultar-cantidad">
+                    <th><i class="fas fa-sort-numeric-up-alt"></i> Cantidad:</th>
+                    <td><input type="number" name="cantidad" id="cantidad" min="1" value="1" placeholder="Ingresa la cantidad" required></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    
+        <!-- DHCHBHDGECVHEDGCVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV-->
+
+
+    <script>
+        // Función para cargar el historial de ventas al cargar la página
+        window.addEventListener('load', function () {
+            cargarHistorialVentas();
+        });
+
+        // Función para cargar el historial de ventas mediante una solicitud AJAX
+        function cargarHistorialVentas() {
+            // Realizar una solicitud AJAX para obtener los resultados
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Mostrar los resultados en el contenedor
+                    document.getElementById('resultados').innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.open('GET', 'historial-ventas.php', true);
+            xhr.send();
+        }
+
+        // Agrega un evento de clic al enlace de cerrar sesión
+        document.getElementById('logout-link').addEventListener('click', function() {
+            // Realizar una solicitud AJAX para cerrar la sesión en el servidor
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Redirigir a la página de inicio de sesión o cualquier otra página
+                    window.location.href = 'login.html';
+                }
+            };
+
+            xhr.open('GET', 'cerrar-sesion.php', true);
+            xhr.send();
+        });
+         // Evita que el usuario retroceda a esta página después de cerrar sesión
+         history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, window.location.href);
+        });
+    </script>
+
+
+
+
+
+</body>
+</html>

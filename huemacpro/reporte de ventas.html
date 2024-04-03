@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de ventas</title>
+    <link rel="stylesheet" href="styles/estilos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <a href="administrar-empleados.html">
+                    <i class="fa-solid fa-pen-to-square"></i> Administrar empleados
+                </a>
+
+                <a href="historial.html">
+                    <i class="fa-solid fa-folder"></i> Historial de ventas
+                </a>
+                <a href="historial.html">
+                    <i class="fa-regular fa-clipboard"></i> Reportes
+                </a>
+
+                <a href="login.html" id="logout-link">
+                    <i class="fa-regular fa-circle-xmark"></i> Cerrar sesión
+                </a>
+            </nav>
+            <label for="btn-menu">✖️</label>
+        </div>
+    </div>
+    
+    <div class="header">
+        <input type="checkbox" id="btn-menu">
+        <div class="container">
+            <div class="btn-menu">
+                <label for="btn-menu"><i class="fas fa-bars"></i></label>
+            </div>
+            <div class="logo">
+                <h1>Historial de ventas</h1>
+            </div>
+            
+        </div>
+    </div>
+<br></br>
+<br></br>
+<br></br>
+    <h2>Historial de Ventas</h2>
+
+    <!-- Formulario para seleccionar el mes y empleado -->
+    <form action="filtrar-ventas.php" method="get">
+        <label for="mes">Selecciona el mes:</label>
+        <input type="month" name="mes" required>
+
+        <!-- Selección del empleado -->
+        <label for="empleado">Selecciona el empleado:</label>
+        <select name="empleado" required>
+            <!-- Opciones de empleados se cargarán dinámicamente con JavaScript -->
+        </select>
+
+        <input type="submit" value="Filtrar">
+    </form>
+
+    <!-- Contenedor para mostrar los resultados -->
+    <div id="resultados"></div>
+    <footer class="user-role" id="user-role">
+    
+       
+    </footer>
+
+    <script src="footer.js"></script>
+    <script>
+        // Función para formatear la fecha en el lado del cliente
+        function formatearFecha(fecha) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(fecha).toLocaleDateString('es-ES', options);
+        }
+
+        // Función para manejar el envío del formulario
+        document.querySelector('form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            // Obtener la fecha y el empleado seleccionados
+            const fechaSeleccionada = document.querySelector('input[type=month]').value;
+            const empleadoSeleccionado = document.querySelector('select[name=empleado]').value;
+
+            // Realizar una solicitud AJAX para obtener los resultados
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Mostrar los resultados en el contenedor
+                    document.getElementById('resultados').innerHTML = xhr.responseText;
+                }
+            };
+
+            xhr.open('GET', `filtrar-ventas.php?mes=${fechaSeleccionada}&empleado=${empleadoSeleccionado}`, true);
+            xhr.send();
+        });
+
+        // Función para cargar dinámicamente las opciones de empleados
+        window.addEventListener('DOMContentLoaded', function () {
+            const selectEmpleado = document.querySelector('select[name=empleado]');
+
+            // Realizar una solicitud AJAX para obtener la lista de empleados
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Parsear la respuesta JSON
+                    const empleados = JSON.parse(xhr.responseText);
+
+                    // Agregar opciones al campo select
+                    empleados.forEach(empleado => {
+                        const option = document.createElement('option');
+                        option.value = empleado.id_empleado;
+                        option.textContent = `${empleado.nombre} ${empleado.apellido_pat} ${empleado.apellido_mat}`;
+                        selectEmpleado.appendChild(option);
+                    });
+                }
+            };
+
+            xhr.open('GET', 'obtener-empleados.php', true);
+            xhr.send();
+        });
+        document.getElementById('logout-link').addEventListener('click', function() {
+            // Realizar una solicitud AJAX para cerrar la sesión en el servidor
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Redirigir a la página de inicio de sesión o cualquier otra página
+                    window.location.href = 'login.html';
+                }
+            };
+
+            xhr.open('GET', 'cerrar-sesion.php', true);
+            xhr.send();
+        });
+         // Evita que el usuario retroceda a esta página después de cerrar sesión
+         history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, window.location.href);
+        });
+    </script>
+        <link rel="stylesheet" href="styles/estilos.css">
+</body>
+</html>

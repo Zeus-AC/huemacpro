@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles/fontawesome-free-6.5.2-web/css/all.min.css">
+    <title>Iniciar Sesión - Empleado</title>
+    <link rel="stylesheet" href="styles/Login.css">
+</head>
+
+<body>
+    <div class="lon">
+        <div class="center-container">
+          <div class="top-header">
+            <header>Iniciar Sesión</header>
+        </div>
+        <form action="login.php" method="POST">
+          <div class="input-field">
+            <label for="usuario"></label>
+            <i class="fas fa-user"></i>
+            <input type="text" class="input" id="usuario" name="usuario" placeholder="Usuario" required>
+          </div>
+          <div class="input-field"> 
+            <label for="contrasena"></label>
+            <i class="fas fa-lock"></i>
+            <input type="password" class="input" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+          </div>
+          <div class="input-field">
+            <input type="submit" class="submit" value="Iniciar Sesión">
+          </div>
+        </form>
+        </div>
+      </div>
+
+    <script>
+        // Agrega un evento al botón de cerrar sesión
+        document.getElementById('logout-link').addEventListener('click', function() {
+            // Simula cerrar sesión eliminando el usuario del almacenamiento local
+            localStorage.removeItem('usuario');
+            
+            // Redirige a la página de inicio de sesión u otra página deseada
+            window.location.href = 'inicio de sesion.html';
+        });
+
+        // Evita que el usuario retroceda a esta página después de cerrar sesión
+        history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, window.location.href);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+
+/* Estilos para la tabla central */
+.form-table {
+    width: 75%; /* Reducir el ancho */
+    margin: 100px auto;
+    border-collapse: collapse;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #e6f7ff; /* Color de fondo azulado */
+}
+
+/* Estilos para el encabezado */
+.form-table h2 {
+    margin-bottom: 20px;
+    color: #1a5276; /* Color del texto azul */
+    text-align: center;
+}
+
+.order-summary {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .hcontainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    border-radius: 4px;
+    background-color: #79e7f3c0;
+  }
+
+
+  .hcontainer{
+    -webkit-box-shadow: 9px 9px 27px -3px rgba(0,0,0,0.51);
+    -moz-box-shadow: 9px 9px 27px -3px rgba(0,0,0,0.51);
+    box-shadow: 9px 9px 27px -3px rgba(0,0,0,0.51);
+
+}

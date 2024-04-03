@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar</title>
+    
+    <link rel="stylesheet" href="styles/stylesmenu.css">
+    <link rel="stylesheet" href="styles/add.css">
+    
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    /* Agrega estilos CSS aquí */
+    label[for="cantidad"], input#cantidad {
+        display: none;
+    }
+</style>
+</head>
+<body>
+<section class="fondo">
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <a href="reporte de ventas.html">
+                    <i class="fa-solid fa-pen-to-square"></i> Registro de ventas
+                </a>
+            
+                <a href="reporte de ventas.html">
+                    <i class="fa-regular fa-clipboard"></i> Reportes
+                </a>
+
+                <a href="menu-empleado.html">
+                    <i class="fa-regular fa-clipboard"></i> inicio
+                </a>
+               
+                <a href="login.html" id="logout-link">
+                    <i class="fa-regular fa-circle-xmark"></i> Cerrar sesión
+                </a>
+            </nav>
+            <label for="btn-menu">✖️</label>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+        
+            <div class="btn-menu">
+                <label for="btn-menu">☰</label>
+            </div>
+            <div class="logo">
+                <h1>Menú</h1>
+            </div>
+            <nav class="menu">
+                <img src="img/log  o.png" alt="Mi Imagen" class="mi-imagen">
+            </nav>
+        </div>
+    </header>
+
+   
+
+</section>
+
+<div id="contenedor">
+    <form action="agregar.php" method="POST">
+        <h2>Agregar Brazalete</h2>
+        <label for="id_tipo_brazalete">Tipo de Brazalete:</label>
+        <select name="id_tipo_brazalete" required>
+            <!-- Rellenar este desplegable con los tipos de brazalete de la base de datos -->
+            <option value="1">Tipo 1</option>
+            <option value="2">Tipo 2</option>
+            <!-- Agregar más opciones según sea necesario -->
+        </select><br>
+
+        <div id="cantidadContainer">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" name="cantidad" value="1" required><br>
+        </div>
+
+        <label for="codigo_qr">Código QR:</label>
+        <input type="text" id="codigo_qr" name="codigo_Qr" required><br>
+
+        <button type="button" id="agregarPulsera">Agregar Brazalete</button>
+        <ul id="pulserasAgregadas"></ul>
+        <input type="hidden" id="pulseras" name="pulseras">
+
+        <button type="submit" name="submit" value="finish">Finalizar</button>
+
+        <div id="tipoBrazaleteSeleccionado"></div>
+    </div>
+
+        <script>
+            document.getElementById('agregarPulsera').addEventListener('click', function() {
+                var codigoQr = document.getElementById('codigo_qr').value;
+                var cantidad = document.getElementById('cantidad').value;
+                var tipoBrazalete = document.querySelector('[name="id_tipo_brazalete"]').selectedOptions[0].text;
+
+                var pulserasAgregadas = document.getElementById('pulserasAgregadas');
+                var listItem = document.createElement('li');
+
+                var pulseraInfo = document.createElement('span');
+                pulseraInfo.textContent = "Código QR: " + codigoQr + ", Tipo: " + tipoBrazalete + ", Cantidad: " + cantidad;
+
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Eliminar';
+                deleteButton.addEventListener('click', function() {
+                    pulserasAgregadas.removeChild(listItem);
+
+                    var pulserasInput = document.getElementById('pulseras');
+                    var currentPulseras = pulserasInput.value;
+
+                    var pulseraToRemove = codigoQr + ":" + cantidad;
+                    currentPulseras = currentPulseras.replace(pulseraToRemove + ',', '');
+                    currentPulseras = currentPulseras.replace(',' + pulseraToRemove, '');
+                    currentPulseras = currentPulseras.replace(pulseraToRemove, '');
+
+                    pulserasInput.value = currentPulseras;
+                });
+
+                listItem.appendChild(pulseraInfo);
+                listItem.appendChild(deleteButton);
+
+                pulserasAgregadas.appendChild(listItem);
+
+                var pulserasInput = document.getElementById('pulseras');
+                var currentPulseras = pulserasInput.value;
+                var nuevaPulsera = codigoQr + ":" + cantidad;
+
+                if (currentPulseras !== "") {
+                    currentPulseras += ",";
+                }
+
+                pulserasInput.value = currentPulseras + nuevaPulsera;
+
+                // Mostrar el tipo de brazalete seleccionado
+                document.getElementById('tipoBrazaleteSeleccionado').innerHTML = "Tipo de Brazalete Seleccionado: " + tipoBrazalete;
+            });
+        </script>
+    </form>
+
+    <div id="resultados"></div>
+
+    <footer class="user-role" id="user-role"></footer>
+
+    <script src="footer.js"></script>
+
+
+</body>
+</html>

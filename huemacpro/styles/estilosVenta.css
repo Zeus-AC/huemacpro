@@ -1,0 +1,333 @@
+/* Estilos generales */
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap');
+
+/* Reinicio de estilos y configuración de la fuente predeterminada */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+/* Estilos para el fondo del cuerpo */
+body {
+    background: url(/img/h1.JPG);
+    background-size: 100vw 100vh;
+    
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; /* Tipo de fuente */
+
+}
+
+/* Estilos para el encabezado */
+.header {
+    width: 100%;
+    height: 75px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color:#78dcee;
+    color: #ffffff; /* Color del texto */
+}
+
+/* Estilos para el contenedor principal */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* Estilos para botón de menú y logo */
+.container .btn-menu,
+.logo {
+    
+    float: left;
+    line-height: 100px;
+}
+
+.container .btn-menu label {
+    color: #fff;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.logo h1 {
+    color: #fff;
+    font-weight: 4000;
+    font-size: 22px;
+    margin-left: 10px;
+}
+
+/* Estilos para el menú */
+.container .menu {
+    float: right;
+}
+
+/* Estilos para una imagen específica */
+.mi-imagen {
+    width: 300px;
+    height: auto;
+    animation: brillo 2s infinite alternate; /* Animación de brillo */
+}
+
+/* Keyframes para la animación de brillo */
+@keyframes brillo {
+    from {
+        opacity: 1; /* Opacidad inicial */
+    }
+    to {
+        opacity: 0.5; /* Opacidad final (brillo) */
+    }
+}
+
+/* Estilos para los enlaces del menú */
+.container .menu a {
+    display: inline-block;
+    padding: 15px;
+    line-height: normal;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    font-size: 150px;
+    margin-right: 5px;
+    
+}
+
+
+/* Efecto de resaltado al pasar el mouse por encima de los enlaces del menú */
+.container .menu a:hover {
+    border-bottom: 2px solid #c7c7c7;
+    padding-bottom: 50px;
+}
+
+/* Menú lateral */
+#btn-menu {
+    display: none;
+}
+
+/* Estilos para el contenedor del menú desplegable */
+.container-menu {
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100vh;
+    left: 0;
+    transition: all 500ms ease;
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 75px; /* Ajuste vertical */
+    z-index: 101px; /* Capa z */
+}
+
+/* Mostrar el menú desplegable al hacer clic en el botón */
+#btn-menu:checked ~ .container-menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Estilos para el menú desplegable */
+.cont-menu {
+    width: 100%;
+    max-width: 250px;
+    background: #082e3d;
+    height: 100vh;
+    position: relative;
+    transition: all 500ms ease;
+    transform: translateX(-100%);
+}
+
+/* Mostrar el menú desplegable */
+#btn-menu:checked ~ .container-menu .cont-menu {
+    transform: translateX(0%);
+    
+}
+
+.cont-menu nav {
+    transform: translateY(15%);
+}
+
+.cont-menu nav a {
+    display: block;
+    text-decoration: none;
+    padding: 20px;
+    color: #c7c7c7;
+    border-left: 5px solid transparent;
+    transition: all 400ms ease;
+}
+
+.cont-menu nav a:hover {
+    border-left: 5px solid #c7c7c7;
+    background: #1f1f1f;
+}
+
+.cont-menu label {
+    position: absolute;
+    right: 5px;
+    top: 10px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 18px;
+}
+.user-role {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #00ffea; /* Color futurista */
+    text-align: center;
+    padding: 10px 0;
+    font-weight: bold;
+    color: #000; /* Color del texto */
+    font-family: 'Arial', sans-serif; /* Tipo de fuente */
+    font-size: 18px;
+    text-transform: uppercase; /* Mayúsculas */
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+
+.user-role p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-role i {
+    margin-right: 5px;
+}
+
+/* Estilos para la tabla central */
+.central-table {
+    width: 80%;
+    margin: 50px auto;
+    border-collapse: collapse; /* Colapsar bordes de la tabla */
+    border-radius: 10px;
+    overflow: hidden; /* Ocultar bordes redondeados de las celdas */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #f2f2f2;
+}
+
+/* Estilos para las celdas */
+.central-table td {
+    padding: 20px;
+    text-align: center;
+}
+
+/* Estilos para el encabezado */
+.central-table h2 {
+    margin-bottom: 20px;
+}
+
+/* Estilos para la tabla central */
+.central-table {
+    width: 60%; /* Reducir el ancho */
+    margin: 100px auto;
+    border-collapse: collapse;
+    border-radius: 10px;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    background-color: #e6f7ff; /* Color de fondo azulado */
+}
+
+/* Estilos para el encabezado */
+.central-table h2 {
+    margin-bottom: 20px;
+    color: #1a5276; /* Color del texto azul */
+}
+
+/* Estilos para los íconos */
+.central-table i {
+    margin-right: 10px;
+    color: #1a5276; /* Color del icono azul */
+}
+
+/* Estilos para el formulario y sus elementos */
+.central-table form {
+    padding: 20px; /* Añadir espacio alrededor del formulario */
+}
+
+/* Estilos para los campos de entrada de texto */
+.central-table input[type="text"],
+.central-table input[type="number"] {
+    padding: 10px; /* Espaciado interno */
+    border: 2px solid #1a5276; /* Borde azul */
+    border-radius: 5px;
+    margin: 5px;
+    width: calc(100% - 22px); /* Ancho del 100% menos el espacio del borde */
+    transition: border-color 0.3s ease; /* Transición suave */
+}
+
+/* Estilos para los campos de entrada de texto */
+.central-table input[type="text"],
+.central-table input[type="number"] {
+    padding: 8px; /* Espaciado interno */
+    border: 2px solid #1a5276; /* Borde azul */
+    border-radius: 5px;
+    margin: 5px;
+    width: calc(100% - 14px); /* Reducción del ancho */
+    transition: border-color 0.3s ease; /* Transición suave */
+}
+
+/* Cambio de color del borde al enfocar el campo */
+.central-table input[type="text"]:focus,
+.central-table input[type="number"]:focus {
+    outline: none; /* Eliminar el contorno predeterminado */
+    border-color: #15385b; /* Cambio de color al enfocar */
+}
+
+/* Estilos para los botones */
+.central-table button,
+.central-table input[type="submit"] {
+    padding: 5px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #1a5276;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+
+/* Cambio de color al pasar el mouse sobre el botón */
+.central-table button:hover,
+.central-table input[type="submit"]:hover {
+    background-color: #15385b;
+    
+}
+/* Estilos para los campos de entrada de texto */
+.central-table input[type="text"],
+.central-table input[type="number"] {
+    padding: 8px; /* Espaciado interno */
+    border: 2px solid #1a5276; /* Borde azul */
+    border-radius: 5px;
+    margin: 5px;
+    width: auto; /* Ancho automático */
+    transition: border-color 0.3s ease; /* Transición suave */
+}
+
+/* Cambio de color del borde al enfocar el campo */
+.central-table input[type="text"]:focus,
+.central-table input[type="number"]:focus {
+    outline: none; /* Eliminar el contorno predeterminado */
+    border-color: #15385b; /* Cambio de color al enfocar */
+}
+
+/* Estilos para los botones */
+.central-table button,
+.central-table input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #1a5276;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Cambio de color al pasar el mouse sobre el botón */
+.central-table button:hover,
+.central-table input[type="submit"]:hover {
+    background-color: #15385b;
+}

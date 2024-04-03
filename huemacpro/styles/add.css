@@ -1,0 +1,74 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#contenedor {
+    background-color: #bedde9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+label {
+    margin-top: 10px;
+    color: #555;
+}
+
+select, input {
+    margin-bottom: 15px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#cantidadContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+button {
+    background-color:#a6b6e9;
+    color: rgb(8, 8, 8);
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color:#d2e4ee;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+#tipoBrazaleteSeleccionado {
+    margin-top: 15px;
+    text-align: center;
+}
+
+#agregarPulsera{
+    margin: 2rem;
+}

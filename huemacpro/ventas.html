@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Realizar Venta</title>
+    <link rel="stylesheet" type="text/css" href="styles/estilosVenta.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .ocultar-cantidad {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <input type="checkbox" id="btn-menu">
+    <div class="container-menu">
+        <div class="cont-menu">
+            <nav>
+                <a href="#">
+                    <i class="fa-solid fa-pen-to-square"></i> Registro de ventas
+                </a>
+                <a href="agregar.html">
+                    <i class="fa-regular fa-clipboard"></i> Agregar Brazaletes
+                </a>
+                <a href="#">
+                    <i class="fa-regular fa-clipboard"></i> Reportes
+                </a>
+               
+                <a href="login.html" id="logout-link">
+                    <i class="fa-regular fa-circle-xmark"></i> Cerrar sesión
+                </a>
+            </nav>
+            <label for="btn-menu">✖️</label>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="container">
+        
+            <div class="btn-menu">
+                <label for="btn-menu">☰</label>
+            </div>
+            <div class="logo">
+                <h1>Menú</h1>
+            </div>
+            <nav class="menu">
+                <img src="img/logo.png" alt="Mi Imagen" class="mi-imagen">
+            </nav>
+        </div>
+    </header>
+
+
+    <table class="central-table">
+        
+            
+            
+
+        <tr>
+            <td colspan="2">
+                <form action="ventas.php" method="post">
+                    
+                
+                    <table class="form-table">
+                        
+                        <tr>
+                            <h2><i class="fa-solid fa-clipboard"></i>Registro de ventas</h2>
+                            <td>
+                                
+                                <label for="nombre"><i class="fas fa-user"></i> Nombre del Cliente:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="apellido_pat"><i class="fas fa-user"></i> Apellido Paterno:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="apellido_pat" id="apellido_pat" placeholder="Ingresa el apellido paterno" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="apellido_mat"><i class="fas fa-user"></i> Apellido Materno:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="apellido_mat" id="apellido_mat" placeholder="Ingresa el apellido materno" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="codigo_qr"><i class="fas fa-qrcode"></i> Código QR de la Pulsera:</label>
+                            </td>
+                            <td>
+                                <input type="text" name="codigo_qr" id="codigo_qr" placeholder="Ingresa el código QR de la pulsera" required>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="cantidad" class="ocultar-cantidad"><i class="fas fa-sort-numeric-up-alt"></i> Cantidad:</label>
+                            </td>
+                            <td>
+                                <input type="number" name="cantidad" id="cantidad" min="1" value="1" class="ocultar-cantidad" placeholder="Ingresa la cantidad" required>
+                            </td>
+                        </tr>
+                    </table>
+                
+<!-- Agrega la clase "wave-button" a los botones -->
+<button type="button" id="agregarPulsera" class="wave-button">Agregar Pulsera</button><br>
+
+<h3>Pulseras Agregadas:</h3>
+<ul id="pulserasAgregadas"></ul>
+
+<input type="hidden" name="pulseras" id="pulseras" value="">
+<!-- Agrega la clase "wave-button" al botón -->
+<input type="submit" value="Finalizar Venta" class="wave-button">
+
+                </form>
+            </td>
+        </tr>
+    </table>
+    <footer class="user-role" id="user-role">
+    
+       
+    </footer>
+
+    <script src="footer.js"></script>
+    <script>
+ 
+        document.getElementById('agregarPulsera').addEventListener('click', function() {
+            var codigoQr = document.getElementById('codigo_qr').value;
+            var cantidad = document.getElementById('cantidad').value;
+
+            var pulserasAgregadas = document.getElementById('pulserasAgregadas');
+            var listItem = document.createElement('li');
+
+            var pulseraInfo = document.createElement('span');
+            pulseraInfo.textContent = "Código QR: " + codigoQr + ", Cantidad: " + cantidad;
+
+       
+            var deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Eliminar';
+            deleteButton.addEventListener('click', function() {
+               
+                pulserasAgregadas.removeChild(listItem);
+
+       
+                var pulserasInput = document.getElementById('pulseras');
+                var currentPulseras = pulserasInput.value;
+
+            
+                var pulseraToRemove = codigoQr + ":" + cantidad;
+                currentPulseras = currentPulseras.replace(pulseraToRemove + ',', '');
+                currentPulseras = currentPulseras.replace(',' + pulseraToRemove, '');
+                currentPulseras = currentPulseras.replace(pulseraToRemove, '');
+
+                pulserasInput.value = currentPulseras;
+            });
+
+           
+            listItem.appendChild(pulseraInfo);
+            listItem.appendChild(deleteButton);
+
+            pulserasAgregadas.appendChild(listItem);
+
+         
+            var pulserasInput = document.getElementById('pulseras');
+            var currentPulseras = pulserasInput.value;
+            var nuevaPulsera = codigoQr + ":" + cantidad;
+
+            if (currentPulseras !== "") {
+                currentPulseras += ",";
+            }
+
+            pulserasInput.value = currentPulseras + nuevaPulsera;
+        });
+        document.getElementById('logout-link').addEventListener('click', function() {
+            // Realizar una solicitud AJAX para cerrar la sesión en el servidor
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // Redirigir a la página de inicio de sesión o cualquier otra página
+                    window.location.href = 'login.html';
+                }
+            };
+
+            xhr.open('GET', 'cerrar-sesion.php', true);
+            xhr.send();
+        });
+         // Evita que el usuario retroceda a esta página después de cerrar sesión
+         history.pushState(null, null, window.location.href);
+        window.addEventListener('popstate', function () {
+            history.pushState(null, null, window.location.href);
+        });
+    </script>
+    <footer class="user-role">
+        <p><i class="fas fa-user-circle"></i> Usuario: </p>
+    </footer>
+</body>
+</html>
